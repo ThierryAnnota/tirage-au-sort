@@ -1,0 +1,52 @@
+header {
+    background-color: #f0f;
+    min-height: 15vh;
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    justify-content: space-around;
+    align-items: center;
+}
+#buttonTittle{
+    display: flex;
+    justify-content: space-around;
+    margin: 5px;
+
+}
+
+#parentsDispo {
+    margin : 25px;
+    padding: 10px;
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+#parentsDispoArray {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.parentCell {
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 10px;
+    margin: 2px;
+    min-width: (100vw/11);
+    flex : 1 0 10%;
+    text-align: center;
+}
+
+#parenstSelectionnes {
+    margin: 25px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(129, 183, 255);
+}
+
+#parentsSelectArray {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+

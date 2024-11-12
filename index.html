@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="app.js" defer></script>
+    <title>Tirage au sort</title>
+</head>
+<body>
+    <header>
+        <div>
+            <input type="text" placeholder="Ecrire le nom des personnes participantes au tirage au sort" id="inputParent">
+            <button id="addParent">Valider</button>
+        </div>
+        <div class="numberLimitForm">nombre de personnes à tirer au sort
+            <input type="text" placeholder="nombre de personnes à tirer au sort" id="inputLimit">
+            <button class="numberLimitBtn">Valider</button>
+        </div>
+        <div id="restart">
+            <button class="restartBtn">Effacer</button>
+        </div>
+    </header>
+    <main>
+        <div id="buttonTittle">
+            <div id="button">
+                <button>Lancer le tirage au sort</button>
+            </div>
+            <div class="numberLimit">
+                <div>nombre de places : <span class="restLimit"></span></div>
+            </div>
+        </div>
+        <div id="parentsDispo">
+            <h2>Parents disponibles</h2>
+            <div id="parentsDispoArray"></div>
+        </div>
+        <div id="parenstSelectionnes">
+            <h2>Parents sélectionnés</h2>
+            <div id="parentsSelectArray">
+
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>
