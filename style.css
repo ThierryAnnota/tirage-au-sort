@@ -1,12 +1,33 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+  }
+
 header {
-    background-color: #f0f;
+    background-color: #b85042;
     min-height: 15vh;
     width: 100%;
     display: flex;
-    padding: 5px;
+    padding: 10px;
     justify-content: space-around;
     align-items: center;
 }
+
+main {
+    margin: 0;
+    background-color: #e7e8d1;
+    flex-grow: 1;
+    padding: 10px;
+    width: 100%;
+}
+
+input::placeholder {
+    color:#b85042;
+    font-style: italic;
+}
+
 #buttonTittle{
     display: flex;
     justify-content: space-around;
@@ -15,10 +36,12 @@ header {
 }
 
 #parentsDispo {
-    margin : 25px;
+    margin: 25px;
     padding: 10px;
-    background-color: #aaa;
+    background-color: #b85042a3;
     border-radius: 5px;
+    color: #e7e8d1;
+    font-weight: 600;
 }
 
 #parentsDispoArray {
@@ -27,11 +50,23 @@ header {
     
 }
 
+.btn {
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.btn-header {
+    background-color: #e7e8d1;
+    color: #b85042;
+
+}
+
 .parentCell {
     border-radius: 5px;
-    border: solid 1px black;
+    border: solid 1px #e7e8d1;
     padding: 10px;
-    margin: 2px;
+    margin: 10px;
     min-width: (100vw/11);
     flex : 1 0 10%;
     text-align: center;
@@ -40,8 +75,10 @@ header {
 #parenstSelectionnes {
     margin: 25px;
     padding: 10px;
+    background-color: #a7beae;
     border-radius: 5px;
-    background-color: rgb(129, 183, 255);
+    color: #e7e8d1;
+    font-weight: 600;
 }
 
 #parentsSelectArray {
@@ -49,4 +86,24 @@ header {
     flex-wrap: wrap;
     
 }
+
+footer {
+    margin: 0 auto;
+    background-color: #e7e8d1;
+    min-height: 5vh;
+    padding: 10px;
+    width: 100%;
+}
+
+img {
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: auto;
+    transition: transform 0.2s; 
+}
+
+img:hover {
+    transform: scale(1.1); 
+  }
 

@@ -47,6 +47,7 @@ const app = {
     chose () {
         app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
         const randomNumber = parseInt(Math.random() * app.parentsDisponibles.length);
+        console.log(`le nombre aléatoire choisi est le : ${randomNumber}`)
         if (app.limit>=1) {
             const parentsSelectionne = app.parentsDisponibles[randomNumber];
             app.divParentsSelected.append(parentsSelectionne);
