@@ -18,7 +18,7 @@ header {
 main {
     margin: 0;
     background-color: #e7e8d1;
-    flex-grow: 1;
+    flex: 1;
     padding: 10px;
     width: 100%;
 }
@@ -31,6 +31,7 @@ input::placeholder {
 #buttonTittle{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin: 5px;
 
 }
@@ -107,3 +108,11 @@ img:hover {
     transform: scale(1.1); 
   }
 
+@media only screen and (max-width:700px){
+    header {
+        flex-direction: column;
+    }
+    header > div {
+        padding: 5px;
+    }
+}

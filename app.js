@@ -13,9 +13,11 @@ const app = {
     
 
     getParents () {
+        if (app.inputParent.value !== ""){
         parents = inputParent.value.split(',');
         app.displayParents();
         inputParent.value = "";
+        }
     },
     
     displayParents() {
@@ -31,15 +33,15 @@ const app = {
     
     getLimit() {
         app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
+        console.log(typeof(Number(app.inputLimit.value)));
         if (Number(app.inputLimit.value) > app.parentsDisponibles.length) {
             alert("tu as choisis un nombre plus grand que le nombre de candidat... essaye encore");
             app.inputLimit.value = "";
         } else {
             app.limit = Number(app.inputLimit.value);
+            console.log(typeof(app.limit));
             app.button.disabled = false;
             app.inputLimit.value = "";
-            app.inputLimit.disabled = true;
-            app.numberLimit.disabled = true;
             app.restLimit.innerHTML = app.limit;
         }
     },
@@ -47,12 +49,16 @@ const app = {
     chose () {
         app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
         const randomNumber = parseInt(Math.random() * app.parentsDisponibles.length);
-        console.log(`le nombre aléatoire choisi est le : ${randomNumber}`)
+        console.log(`le nombre aléatoire choisi est le : ${randomNumber}`);
         if (app.limit>=1) {
             const parentsSelectionne = app.parentsDisponibles[randomNumber];
             app.divParentsSelected.append(parentsSelectionne);
             app.limit-- ; 
             app.restLimit.innerHTML = app.limit;
+            app.inputLimit.disabled = true;
+            app.numberLimit.disabled = true;
+            app.inputParent.disabled = true;
+            document.querySelector("#addParent").disabled = true;
             if(app.limit ===0){
                 app.button.disabled = true;
                 app.button.setAttribute("title", "coucou");
@@ -65,6 +71,8 @@ const app = {
         app.divParentsSelected.innerHTML = "";
         app.inputLimit.disabled = false;
         app.numberLimit.disabled = false;
+        app.inputParent.disabled = false;
+
         app.inputLimit.value = "";
         app.limit = null;
         app.button.disabled = true;
