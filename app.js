@@ -10,6 +10,7 @@ const app = {
     divParentsSelected : null,
     limit : null,
     restLimit : null,
+    resumeBtn : null,
     
 
     getParents () {
@@ -27,8 +28,13 @@ const app = {
             parentsDispoCell.classList.add("parentCell");
             const nomParentDispo = parent;
             parentsDispoCell.innerHTML = nomParentDispo;
+            parentsDispoCell.addEventListener("click", app.focusCell);
             app.divTableauParentsDispo.append(parentsDispoCell);
         });
+    },
+
+    focusCell(event){
+        event.target.contentEditable = true;
     },
     
     getLimit() {
@@ -52,6 +58,7 @@ const app = {
         console.log(`le nombre aléatoire choisi est le : ${randomNumber}`);
         if (app.limit>=1) {
             const parentsSelectionne = app.parentsDisponibles[randomNumber];
+            parentsSelectionne.removeEventListener("click", app.focusCell);
             app.divParentsSelected.append(parentsSelectionne);
             app.limit-- ; 
             app.restLimit.innerHTML = app.limit;
@@ -61,9 +68,20 @@ const app = {
             document.querySelector("#addParent").disabled = true;
             if(app.limit ===0){
                 app.button.disabled = true;
-                app.button.setAttribute("title", "coucou");
-            }
+                app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
+                if(app.parentsDisponibles.length !==0) {
+                    app.resumeBtn.classList.remove("hidden");
+                };
+            };
         };
+    },
+
+    resumeSelection (){
+        console.log("coucou");
+        app.limit++;
+        app.restLimit.innerHTML = app.limit;
+        app.button.disabled = false;
+        app.resumeBtn.classList.add("hidden");
     },
     
     restart (){
@@ -72,7 +90,7 @@ const app = {
         app.inputLimit.disabled = false;
         app.numberLimit.disabled = false;
         app.inputParent.disabled = false;
-
+        app.resumeBtn.classList.add('hidden');
         app.inputLimit.value = "";
         app.limit = null;
         app.button.disabled = true;
@@ -97,6 +115,8 @@ const app = {
                 app.getParents();
             }
         });
+        app.resumeBtn = document.querySelector('.resumeBtn');
+        app.resumeBtn.addEventListener('click', app.resumeSelection);
         app.buttonDiv = document.getElementById("button");
         app.button = app.buttonDiv.childNodes[1];
         app.button.disabled = true;
