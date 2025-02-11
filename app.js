@@ -5,12 +5,14 @@ const app = {
     divTableauParentsDispo : null,
     buttonDiv : null,
     button : null,
-    restartButton : null,
+    cleanButton : null,
     parentsDisponibles : null,
     divParentsSelected : null,
     limit : null,
     restLimit : null,
     resumeBtn : null,
+    restartButton : null,
+    restartArray : null,
     
 
     getParents () {
@@ -39,13 +41,11 @@ const app = {
     
     getLimit() {
         app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
-        console.log(typeof(Number(app.inputLimit.value)));
         if (Number(app.inputLimit.value) > app.parentsDisponibles.length) {
             alert("tu as choisis un nombre plus grand que le nombre de candidat... essaye encore");
             app.inputLimit.value = "";
         } else {
             app.limit = Number(app.inputLimit.value);
-            console.log(typeof(app.limit));
             app.button.disabled = false;
             app.inputLimit.value = "";
             app.restLimit.innerHTML = app.limit;
@@ -77,14 +77,13 @@ const app = {
     },
 
     resumeSelection (){
-        console.log("coucou");
         app.limit++;
         app.restLimit.innerHTML = app.limit;
         app.button.disabled = false;
         app.resumeBtn.classList.add("hidden");
     },
     
-    restart (){
+    clean (){
         app.divTableauParentsDispo.innerHTML = "";
         app.divParentsSelected.innerHTML = "";
         app.inputLimit.disabled = false;
@@ -95,6 +94,21 @@ const app = {
         app.limit = null;
         app.button.disabled = true;
         app.restLimit.innerHTML = "";
+    },
+
+    restart (){
+        let selection = app.divTableauParentsDispo.querySelectorAll('div');
+        app.restartArray = [];
+        selection.forEach(e=>{
+            app.restartArray.push(e.textContent);
+        });        
+        selection = app.divParentsSelected.querySelectorAll('div');
+        selection.forEach(e=>{
+            app.restartArray.push(e.textContent);
+        });
+        app.clean();
+        parents = app.restartArray;
+        app.displayParents();
     },
 
     
@@ -121,7 +135,9 @@ const app = {
         app.button = app.buttonDiv.childNodes[1];
         app.button.disabled = true;
         app.button.addEventListener("click", app.chose);
-        app.restartButton = document.querySelector(".restartBtn");
+        app.cleanButton = document.querySelector(".cleanBtn");
+        app.cleanButton.addEventListener("click", app.clean);
+        app.restartButton = document.querySelector(".restart");
         app.restartButton.addEventListener("click", app.restart);
         app.divParentsSelected = document.getElementById("parentsSelectArray");
         app.restLimit = document.querySelector(".restLimit");
