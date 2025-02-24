@@ -56,6 +56,12 @@ const app = {
 
     focusCell(event){
         event.target.contentEditable = true;
+        event.target.addEventListener("keydown", (e) => {
+            if(e.key ==='Enter'){
+                e.preventDefault();
+                event.target.blur();
+            }
+        })
     },
     
     getLimit() {
@@ -72,6 +78,8 @@ const app = {
                 app.inputLimit.value = "";
                 app.restLimit.innerHTML = app.limit;
             }
+        } else {
+            app.inputLimit.value = "";
         };
     },
     
