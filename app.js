@@ -13,7 +13,26 @@ const app = {
     resumeBtn : null,
     restartButton : null,
     restartArray : null,
-    
+    modaleBtn : null,
+    modale : null,
+    modaleCloseBtn : null,
+
+    openModal () {
+        app.modale.classList.remove("hidden");
+        app.modale.setAttribute('aria-modal', 'true');
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                app.closeModale();
+            }
+        })
+        app.modaleCloseBtn.focus();
+    },
+
+    closeModale() {
+        app.modale.classList.add("hidden");
+        app.modale.classList.remove('aria-modal');
+        app.inputParent.focus();
+    },
 
     getParents () {
         if (app.inputParent.value !== ""){
@@ -40,16 +59,20 @@ const app = {
     },
     
     getLimit() {
-        app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
-        if (Number(app.inputLimit.value) > app.parentsDisponibles.length) {
-            alert("tu as choisis un nombre plus grand que le nombre de candidat... essaye encore");
-            app.inputLimit.value = "";
-        } else {
-            app.limit = Number(app.inputLimit.value);
-            app.button.disabled = false;
-            app.inputLimit.value = "";
-            app.restLimit.innerHTML = app.limit;
-        }
+        const regex = /^([1-9]+)$/;
+        if (regex.test(app.inputLimit.value)===true){
+            app.numberLimit.disabled = false;
+            app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
+            if (Number(app.inputLimit.value) > app.parentsDisponibles.length) {
+                alert("tu as choisis un nombre plus grand que le nombre de candidat... essaye encore");
+                app.inputLimit.value = "";
+            } else {
+                app.limit = Number(app.inputLimit.value);
+                app.button.disabled = false;
+                app.inputLimit.value = "";
+                app.restLimit.innerHTML = app.limit;
+            }
+        };
     },
     
     chose () {
@@ -94,6 +117,7 @@ const app = {
         app.limit = null;
         app.button.disabled = true;
         app.restLimit.innerHTML = "";
+        app.inputParent.focus();
     },
 
     restart (){
@@ -109,11 +133,13 @@ const app = {
         app.clean();
         parents = app.restartArray;
         app.displayParents();
+        app.inputLimit.focus();
     },
 
     
     init () {
         app.inputParent = document.querySelector("#inputParent");
+        app.inputParent.focus();
         app.inputLimit = document.querySelector("#inputLimit")
         app.inputLimit.addEventListener('keydown', function (event) {
             if (event.key === "Enter") {
@@ -141,7 +167,11 @@ const app = {
         app.restartButton.addEventListener("click", app.restart);
         app.divParentsSelected = document.getElementById("parentsSelectArray");
         app.restLimit = document.querySelector(".restLimit");
-        
+        app.modaleBtn = document.querySelector(".modaleBtn");
+        app.modaleBtn.addEventListener("click", app.openModal);
+        app.modaleCloseBtn = document.querySelector(".modale-close-btn");
+        app.modaleCloseBtn.addEventListener("click", app.closeModale);
+        app.modale = document.querySelector(".modale-overlay");
     },
 };
 

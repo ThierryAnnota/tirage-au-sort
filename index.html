@@ -17,7 +17,7 @@
         </div>
         <div class="numberLimitForm">
             <input type="number" min="0" step="1" placeholder="nombre de personnes à tirer au sort" id="inputLimit" class="btn">
-            <button class="numberLimitBtn btn btn-header">Valider</button>
+            <button class="numberLimitBtn btn btn-header" disabled>Valider</button>
         </div>
         <div id="clean">
             <button class="cleanBtn btn btn-header">Effacer</button>
@@ -25,16 +25,40 @@
         <div class="restart">
             <button class="restartBtn btn btn-header">Recommencer</button>
         </div>
+        <div class="modaleBtn ">
+            <button class="modale-btn btn btn-header">?</button>
+        </div>
         
     </header>
     <main>
+        <aside class="modale-overlay hidden" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
+            <div class="modale">
+                <div class="modale-header">
+                    <h2 class="titlemodal">Notice d'utilisation</h2>
+                    <button class="modale-close-btn btn">Fermer la modale</button>
+                </div>
+                <h3>Respect du RGPD</h3>
+                <p>✅ Cet outil a été uniquement conçu en front-end. Il n'y a pas de back-end : <span>aucune donnée n'est envoyée sur un serveur</span> ; tout ce que vous entrez dans l'outil (les noms pour le tirage au sort) reste uniquement sur votre appareil. Rien n'est stocké en ligne. </p>
+                <p>✅ Aucune inscription, aucun suivi : vous n'avez pas besoin de créer un compte, et <span>aucune donnée personnelle n'est enregistrée</span>.</p>
+                <p>✅ Pas de cookies, <span>pas de pub</span> : Ce site est 100% gratuit et respecte votre vie privée.</p>
+                <p>🌐 Connexion Internet nécessaire : uniquement pour accéder au site, mais ensuite, tout fonctionne localement sur votre appareil.</p>
+                <p>Le code est librement consultable sur github (lien en bas de page en cliquant sur le logo).</p>
+                    
+                <h3>💡 Comment ça marche ? </h3>
+                <p>Entrez simplement les noms un par un ou <span class="underline">les séparant par des virgules</span>.</p> <p>Petite astuce : si vous utilisez souvent les mêmes noms (de personnes ou d'objets) pour le tirage au sort, il peut être utile d'enregistrer cette liste (en séparant les noms par des virgules) dans un fichier ".txt".</p>
+                <p>NB : "Effacer" permet de tout effacer (ce qui est plutôt logique), tel que l'on pourrait le faire en raffraichissant la page ("F5", "Cmd/Ctrl + R"). </p>
+                <p>"Recommencer" permet de relancer un tirage avec les candidats présents sur la page (qui ne seront pas forcément dans le même ordre)</p>
+                <p>Lorsque le tirage au sort est terminé, tant qu'il reste des candidats, un bouton apparaît permettant de remettre une pièce dans la machine.</p>
+                <p>Il est possible de corriger l'orthographe d'un.e candidat.e (en cliquant sur son nom). La fonction disparaît lorsqu'il ou elle est sélectionné.e. </p>
+            </div>
+        </aside>
         <div id="buttonTittle">
             <div id="button">
                 <button class="btn">Lancer le tirage au sort</button>
                 <button class="btn resumeBtn hidden">poursuivre le tirage</button>
             </div>
             <div class="numberLimit">
-                <div>nombre de places : <span class="restLimit"></span></div>
+                <div>nombre de places : <span class="restLimit"></span></div>           
             </div>
         </div>
         <div id="parentsDispo">
