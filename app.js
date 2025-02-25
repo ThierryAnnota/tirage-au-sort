@@ -50,6 +50,7 @@ const app = {
             const nomParentDispo = parent;
             parentsDispoCell.innerHTML = nomParentDispo;
             parentsDispoCell.addEventListener("click", app.focusCell);
+            parentsDispoCell.addEventListener("blur", app.unFocusCell);
             app.divTableauParentsDispo.append(parentsDispoCell);
         });
     },
@@ -62,6 +63,10 @@ const app = {
                 event.target.blur();
             }
         })
+    },
+
+    unFocusCell(event) {
+        event.target.contentEditable = false;
     },
     
     getLimit() {
@@ -89,6 +94,10 @@ const app = {
         console.log(`le nombre aléatoire choisi est le : ${randomNumber}`);
         if (app.limit>=1) {
             const parentsSelectionne = app.parentsDisponibles[randomNumber];
+            if (parentsSelectionne.contentEditable === "true") {
+                parentsSelectionne.contentEditable = "false";
+                parentsSelectionne.blur();
+            };
             parentsSelectionne.removeEventListener("click", app.focusCell);
             app.divParentsSelected.append(parentsSelectionne);
             app.limit-- ; 
@@ -132,14 +141,17 @@ const app = {
         let selection = app.divTableauParentsDispo.querySelectorAll('div');
         app.restartArray = [];
         selection.forEach(e=>{
-            app.restartArray.push(e.textContent);
-        });        
+            app.restartArray.push(e.innerText);
+        });
+        console.log(this.restartArray);        
         selection = app.divParentsSelected.querySelectorAll('div');
         selection.forEach(e=>{
             app.restartArray.push(e.textContent);
+            console.log('2ème tour : ' + this.restartArray)
         });
         app.clean();
         parents = app.restartArray;
+        console.log(parents);
         app.displayParents();
         app.inputLimit.focus();
     },
