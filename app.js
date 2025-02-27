@@ -86,8 +86,8 @@ const app = {
     },
 
     deleteDiv(event) {;
-        event.target.parentElement.remove();
         if (window.confirm("si vous supprimez ce/cette candidat.e, vous recommencerez le tirage au sort")){
+            event.target.parentElement.remove();
             app.restart()
         };
     },
