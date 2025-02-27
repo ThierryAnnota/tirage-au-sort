@@ -5,6 +5,10 @@ body {
     min-height: 100vh; 
   }
 
+*:focus {
+    outline: none;
+}
+
 header {
     background-color: #b85042;
     min-height: 15vh;
@@ -66,6 +70,11 @@ input::placeholder {
     font-weight: 600;
 }
 
+#button button:disabled{
+    background-color: rgb(176, 175, 175);
+    cursor: not-allowed;
+}
+
 #parentsDispo {
     margin: 25px;
     padding: 10px;
@@ -79,6 +88,20 @@ input::placeholder {
     display: flex;
     flex-wrap: wrap;
     
+}
+
+.delete-div-button{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #b85042;
+    color: #e7e8d1;
+    font-weight: 700;
+    position: absolute;
+    top: -10px;
+    right: -10px;
 }
 
 .btn {
@@ -155,8 +178,9 @@ input::placeholder {
 .parentCell {
     border-radius: 5px;
     border: solid 1px #e7e8d1;
-    padding: 10px;
+    padding: 30px;
     margin: 10px;
+    position: relative;
     min-width: (100vw/11);
     flex : 1 0 10%;
     text-align: center;
@@ -196,6 +220,11 @@ img {
 img:hover {
     transform: scale(1.1); 
   }
+
+.red{
+    background-color: red;
+}
+
 
 @media only screen and (max-width:700px){
     header {

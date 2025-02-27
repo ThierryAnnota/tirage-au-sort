@@ -48,25 +48,48 @@ const app = {
             const parentsDispoCell = document.createElement("div");
             parentsDispoCell.classList.add("parentCell");
             const nomParentDispo = parent;
-            parentsDispoCell.innerHTML = nomParentDispo;
+            const spanName = document.createElement("span");
+            spanName.classList.add("name");
+            spanName.innerHTML = nomParentDispo;
+            parentsDispoCell.append(spanName);
             parentsDispoCell.addEventListener("click", app.focusCell);
-            parentsDispoCell.addEventListener("blur", app.unFocusCell);
+            const deleteDivBtn = document.createElement("button");
+            deleteDivBtn.innerText = "X";
+            deleteDivBtn.classList.add("delete-div-button","hidden");
+            deleteDivBtn.addEventListener("click", app.deleteDiv)
             app.divTableauParentsDispo.append(parentsDispoCell);
+            parentsDispoCell.append(deleteDivBtn);
         });
     },
 
     focusCell(event){
-        event.target.contentEditable = true;
+        const divSelected = event.currentTarget;
+        const spanDivSelected = event.currentTarget.firstChild;
+        spanDivSelected.contentEditable = true;
+        spanDivSelected.focus();
+        divSelected.lastChild.classList.remove("hidden");
+        document.addEventListener('click', blurDiv);
+        function blurDiv(e){
+            if(e.target !== divSelected && e.target !== spanDivSelected){
+                spanDivSelected.removeAttribute("contentEditable");
+                divSelected.lastChild.classList.add("hidden");
+                document.removeEventListener('click', blurDiv);
+            }
+        };
         event.target.addEventListener("keydown", (e) => {
             if(e.key ==='Enter'){
                 e.preventDefault();
-                event.target.blur();
+                spanDivSelected.removeAttribute("contentEditable");
+                divSelected.lastChild.classList.add("hidden");
             }
         })
     },
 
-    unFocusCell(event) {
-        event.target.contentEditable = false;
+    deleteDiv(event) {;
+        event.target.parentElement.remove();
+        if (window.confirm("si vous supprimez ce/cette candidat.e, vous recommencerez le tirage au sort")){
+            app.restart()
+        };
     },
     
     getLimit() {
@@ -138,20 +161,18 @@ const app = {
     },
 
     restart (){
-        let selection = app.divTableauParentsDispo.querySelectorAll('div');
+
+        let selection = app.divTableauParentsDispo.querySelectorAll('.name');
         app.restartArray = [];
         selection.forEach(e=>{
-            app.restartArray.push(e.innerText);
-        });
-        console.log(this.restartArray);        
-        selection = app.divParentsSelected.querySelectorAll('div');
+            app.restartArray.push(e.textContent);
+        });      
+        selection = app.divParentsSelected.querySelectorAll('.name');
         selection.forEach(e=>{
             app.restartArray.push(e.textContent);
-            console.log('2ème tour : ' + this.restartArray)
         });
         app.clean();
         parents = app.restartArray;
-        console.log(parents);
         app.displayParents();
         app.inputLimit.focus();
     },
