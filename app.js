@@ -98,7 +98,7 @@ const app = {
             app.numberLimit.disabled = false;
             app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
             if (Number(app.inputLimit.value) > app.parentsDisponibles.length) {
-                alert("tu as choisis un nombre plus grand que le nombre de candidat... essaye encore");
+                alert("tu as choisis un nombre plus grand que le nombre de candidats... essaye encore");
                 app.inputLimit.value = "";
             } else {
                 app.limit = Number(app.inputLimit.value);
@@ -175,6 +175,7 @@ const app = {
         parents = app.restartArray;
         app.displayParents();
         app.inputLimit.focus();
+        document.querySelector("#addParent").disabled = false;
     },
 
     
