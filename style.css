@@ -87,7 +87,30 @@ input::placeholder {
 #parentsDispoArray {
     display: flex;
     flex-wrap: wrap;
-    
+}
+
+.spanNumber {
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #8ca293;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.gold {
+    background-color: #ffc13b;
+    color: #fff1e1 ;
+}
+
+.silver {
+    background-color: #ced7d8;
+    color: #a2a595;
+}
+
+.bronze {
+    background-color: #c4a35a;
+    color: #322514;
 }
 
 .delete-div-button{

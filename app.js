@@ -16,6 +16,7 @@ const app = {
     modaleBtn : null,
     modale : null,
     modaleCloseBtn : null,
+    numberOfChosenOne : 1,
 
     openModal () {
         app.modale.classList.remove("hidden");
@@ -67,12 +68,12 @@ const app = {
         const spanDivSelected = event.currentTarget.firstChild;
         spanDivSelected.contentEditable = true;
         spanDivSelected.focus();
-        divSelected.lastChild.classList.remove("hidden");
+        divSelected.querySelector("button").classList.remove("hidden");
         document.addEventListener('click', blurDiv);
         function blurDiv(e){
             if(e.target !== divSelected && e.target !== spanDivSelected){
                 spanDivSelected.removeAttribute("contentEditable");
-                divSelected.lastChild.classList.add("hidden");
+                divSelected.querySelector("button").classList.add("hidden");
                 document.removeEventListener('click', blurDiv);
             }
         };
@@ -80,7 +81,7 @@ const app = {
             if(e.key ==='Enter'){
                 e.preventDefault();
                 spanDivSelected.removeAttribute("contentEditable");
-                divSelected.lastChild.classList.add("hidden");
+                divSelected.querySelector("button").classList.add("hidden");
             }
         })
     },
@@ -119,9 +120,20 @@ const app = {
             const parentsSelectionne = app.parentsDisponibles[randomNumber];
             if (parentsSelectionne.contentEditable === "true") {
                 parentsSelectionne.contentEditable = "false";
-                parentsSelectionne.blur();
+                // parentsSelectionne.blur();
             };
             parentsSelectionne.removeEventListener("click", app.focusCell);
+            const spanNumber = document.createElement("span");
+            spanNumber.classList.add("spanNumber");
+            if (app.numberOfChosenOne ===1){
+                spanNumber.classList.add("gold");
+            } else if (app.numberOfChosenOne ===2) {
+                spanNumber.classList.add("silver");
+            } else if (app.numberOfChosenOne ===3) {
+                spanNumber.classList.add("bronze");
+            }
+            spanNumber.innerText = app.numberOfChosenOne;
+            parentsSelectionne.append(spanNumber);
             app.divParentsSelected.append(parentsSelectionne);
             app.limit-- ; 
             app.restLimit.innerHTML = app.limit;
@@ -129,6 +141,7 @@ const app = {
             app.numberLimit.disabled = true;
             app.inputParent.disabled = true;
             document.querySelector("#addParent").disabled = true;
+            app.numberOfChosenOne ++;
             if(app.limit ===0){
                 app.button.disabled = true;
                 app.parentsDisponibles = app.divTableauParentsDispo.querySelectorAll('.parentCell');
@@ -158,6 +171,7 @@ const app = {
         app.button.disabled = true;
         app.restLimit.innerHTML = "";
         app.inputParent.focus();
+        app.numberOfChosenOne = 1;
     },
 
     restart (){
@@ -176,6 +190,7 @@ const app = {
         app.displayParents();
         app.inputLimit.focus();
         document.querySelector("#addParent").disabled = false;
+        app.numberOfChosenOne = 1;
     },
 
     
