@@ -33,3 +33,5 @@ Initialement conçue pour choisir objectivement des parents d’élèves en sort
 
 S’il reste des candidats **non sélectionné.e.s** une fois toutes les places attribuées, une option permet d’**ajouter une place** et de poursuivre le tirage.  
 Cette action est proposée **jusqu’à épuisement des candidat.e.s**
+
+
