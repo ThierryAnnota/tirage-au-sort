@@ -16,4 +16,4 @@ jobs:
       with:
         target-url: https://forge.apps.education.fr/annotathierry/tirageau-sort
         target-username: annotathierry
-        target-token: ${{ secrets.GITLAB_TOKEN }}
+        target-token: ${{ secrets.GITLAB_TOKEN_2 }}
